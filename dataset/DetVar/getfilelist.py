@@ -2,7 +2,7 @@
 
 import os
 
-with open('DetVar.smp') as f:
+with open('DetVarSample.txt') as f:
   for line in f:
     c = line.split()
     if len(c) != 2: continue
