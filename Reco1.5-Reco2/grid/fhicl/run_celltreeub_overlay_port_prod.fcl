@@ -1,0 +1,69 @@
+#include "services_microboone.fcl"
+#include "database_microboone.fcl"
+#include "celltreeub_overlay.fcl"
+
+process_name: CellTreeUB
+
+services:
+{
+  TFileService: { fileName: "celltreeOVERLAY.root" }
+  #TimeTracker:   {}
+  RandomNumberGenerator: {}
+  message:      @local::standard_info
+  @table::microboone_services
+  UBOpReadoutMap: @local::microboone_opreadoutmap
+  PMTGainService: @local::microboone_pmtgain_service
+  FileCatalogMetadata:  @local::art_file_catalog_data
+}
+
+
+source:
+{
+  module_type: RootInput
+  fileNames:  [ "gen.root" ]
+  firstEvent : 1
+  maxEvents:  -1
+}
+
+source.inputCommands: [ "keep *_*_*_*", "drop *_*_*_PortRedux" ]
+
+outputs:
+{
+    out:
+        {
+        module_type: RootOutput
+        fileName:    "%ifb_postwcct.root"
+        dataTier:    "reconstructed"
+        compressionLevel: 1
+        }
+}
+
+
+
+physics:
+{
+  analyzers:
+  {
+    Event : @local::celltreeub_overlay
+  }
+
+  analysis: [ Event ]
+  stream1: [ out ]
+  end_paths: [ analysis, stream1 ]
+}
+
+services.DetectorPropertiesService.NumberTimeSamples:    6400
+services.DetectorClocksService.InheritClockConfig:       false
+services.DetectorClocksService.TriggerOffsetTPC:         -0.400e3
+
+services.PMTGainService.PmtGainProvider.UseDB: true
+services.PMTGainService.PmtGainProvider.DatabaseRetrievalAlg.DBUrl: "https://dbdata0vm.fnal.gov:8443/uboonecon_prod/app/"
+services.PMTGainService.PmtGainProvider.DatabaseRetrievalAlg.DBTag: "v1r0"
+
+microboone_tfile_metadata:
+{
+  JSONFileName:	         [ "celltreeOVERLAY.root.json", "nuselOVERLAY_WCP.root.json"]
+  GenerateTFileMetadata: [ true, true ]
+  dataTier:              [ "celltree", "celltree" ]
+  fileFormat:            [ "root", "root" ]
+}

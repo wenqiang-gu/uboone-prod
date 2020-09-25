@@ -1,0 +1,98 @@
+{
+  "file_type" : "overlay",
+  "release" : "WCP-001404",
+  "WCP_tarball" : "/pnfs/uboone/persistent/users/hanyuwei/resilient/WCPport/nueDev/WCP_v00_14_04.tar",
+  "larsoft_tarball" : "/pnfs/uboone/resilient/users/hanyuwei/WCPport/nueDev/uboonecode_v08_00_00_42_Aug19.tar",
+  "larsoft_tag" : "v08_00_00_42",
+  "larsoft_qual" : "e17:prof",
+  "initscript" : "/uboone/app/users/wgu/NuSel/Validation/spool/initscript_wcpplus_inputlist.sh",
+  "FHiCLs" : ["run_wcpplus_port.fcl", "run_wcpf_port.fcl", "run_eventweight_microboone_mar18.fcl"],
+  "FHiCLs+" : ["run_wcpplus_port.fcl", "run_wcpf_port.fcl", "run_eventweight_microboone_mar18.fcl", "run_eventweight_microboone_LEE.fcl"],
+  "numjobs" : -1,
+  "celltree_dataset" : "prodgenie_bnb_nu_uboone_overlay_mcc9.0_run1_wcp_reco1.5_v08_00_00_29_reco1.5_celltree",
+  
+  "projects": [
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-00",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-00.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-01",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-01.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-02",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-02.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-03",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-03.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-04",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-04.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-05",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-05.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-06",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-06.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-07",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-07.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-08",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-08.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-09",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-09.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-10",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-10.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-11",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-11.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_run1-12",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/prodgenie_bnb_nu_overlay_run1/prodgenie_bnb_nu_overlay_run1-12.txt"
+    }
+
+
+  ]
+
+}
+
+

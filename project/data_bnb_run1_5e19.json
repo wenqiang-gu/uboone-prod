@@ -1,0 +1,51 @@
+{
+  "file_type" : "data",
+  "release" : "WCP-001404",
+  "WCP_tarball" : "/pnfs/uboone/persistent/users/hanyuwei/resilient/WCPport/nueDev/WCP_v00_14_04.tar",
+  "larsoft_tarball" : "/pnfs/uboone/resilient/users/hanyuwei/WCPport/nueDev/uboonecode_v08_00_00_42_Aug19.tar",
+  "larsoft_tag" : "v08_00_00_42",
+  "larsoft_qual" : "e17:prof",
+  "initscript" : "/uboone/app/users/wgu/NuSel/Validation/spool/initscript_wcpplus_inputlist.sh",
+  "FHiCLs": ["/uboone/app/users/wgu/larsoft/v08_00_00_42/localProducts_larsoft_v08_05_00_13_e17_prof/ubreco/v08_00_00_42/job/run_wcpplus_port.fcl", "/uboone/app/users/wgu/larsoft/v08_00_00_42/localProducts_larsoft_v08_05_00_13_e17_prof/ubreco/v08_00_00_42/job/run_wcpf_port.fcl"],
+  "FHiCLs-" : ["run_wcpplus_port.fcl", "run_wcpf_port.fcl"],
+  "FHiCLs+" : ["run_wcpplus_port.fcl", "run_wcpf_port.fcl", "run_eventweight_microboone_mar18.fcl"],
+  "FHiCLs++" : ["run_wcpplus_port.fcl", "run_wcpf_port.fcl", "run_eventweight_microboone_mar18.fcl", "run_eventweight_microboone_LEE.fcl"],
+  "numjobs" : -1,
+  "celltree_dataset" : "data_bnb_mcc9.1_wcp_port_v08_00_00_28_reco1.5_C1_5e19_celltree",
+  
+  "projects": [
+    {
+      "name": "data_bnb_run1_5e19_00",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/data_bnb_run1_5e19/data_bnb_run1_5e19_00.txt"
+    },
+    {
+      "name": "data_bnb_run1_5e19_01",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/data_bnb_run1_5e19/data_bnb_run1_5e19_01.txt"
+    },
+    {
+      "name": "data_bnb_run1_5e19_02",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/data_bnb_run1_5e19/data_bnb_run1_5e19_02.txt"
+    },
+    {
+      "name": "data_bnb_run1_5e19_03",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/data_bnb_run1_5e19/data_bnb_run1_5e19_03.txt"
+    },
+    {
+      "name": "data_bnb_run1_5e19_04",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/data_bnb_run1_5e19/data_bnb_run1_5e19_04.txt"
+    },
+    {
+      "name": "data_bnb_run1_5e19_05",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/data_bnb_run1_5e19/data_bnb_run1_5e19_05.txt"
+    },
+    {
+      "name": "data_bnb_run1_5e19_06",
+      "inputlist" : "/pnfs/uboone/resilient/users/wgu/filelist/data_bnb_run1_5e19/data_bnb_run1_5e19_06.txt"
+    }
+
+
+  ]
+
+}
+
+
