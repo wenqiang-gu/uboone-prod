@@ -15,20 +15,22 @@ def execute(obj):
   # larsoft_tag = "v08_00_00_42"
   # larsoft_qual = "e17:prof"
   # FHiCLs = ["run_wcpplus_port.fcl", "run_wcpf_port.fcl", "run_eventweight_microboone_mar18.fcl", "run_eventweight_microboone_LEE.fcl"] #, "/uboone/app/users/wgu/NuSel/Validation/spool/run_WCPcheckout.fcl"]
-  # initscript = "/uboone/app/users/wgu/NuSel/Validation/spool/initscript_wcpplus_inputlist.sh"
+  # endscript = "/uboone/app/users/wgu/NuSel/Validation/spool/initscript_wcpplus_inputlist.sh" # FIXME: give a "end" script
   # numjobs = -1 # -1: all jobs
 
   release = obj["release"]
   file_type = obj["file_type"]
   name = obj["name"]
   inputlist = obj["inputlist"]
-  celltree_dataset = obj["celltree_dataset"]  
+  # celltree_dataset = obj["celltree_dataset"]  
   WCP_tarball = obj["WCP_tarball"]  
   larsoft_tarball = obj["larsoft_tarball"]  
   larsoft_tag = obj["larsoft_tag"]  
   larsoft_qual =  obj["larsoft_qual"]
   FHiCLs =  obj["FHiCLs"]
-  initscript =  obj["initscript"]
+  if "WireMod".lower() in name.lower():
+    FHiCLs = obj["WireModFHiCLs"]
+  endscript =  obj["endscript"]
   numjobs =  obj["numjobs"]
   
   
@@ -47,9 +49,9 @@ def execute(obj):
     fhicls += "<fcl>%s</fcl>\n" %fcl
   
   # check celltree def name
-  if not celltree_dataset.endswith("celltree"):
-    print("Error! CellTree dataset name should end with ``celltree``")
-    exit()
+  # if not celltree_dataset.endswith("celltree"):
+  #   print("Error! CellTree dataset name should end with ``celltree``")
+  #   exit()
   
   # template for project xml
   temp_content =  \
@@ -89,7 +91,7 @@ def execute(obj):
   <!--copy>1</copy-->
 
   <!-- Project stages -->
-  <stage name="port2">
+  <stage name="portAll">
     $FHiCLs
     <outdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/reco</outdir>
     <logdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/log</logdir>
@@ -99,9 +101,9 @@ def execute(obj):
     <numjobs>$numjobs</numjobs>
     <memory>4000</memory> 
     <schema>root</schema>
-    <jobsub>--expected-lifetime=8h -e WCP_celltree_dataset=$celltree_dataset --tar_file_name=dropbox://$WCP_tarball --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)&amp;&amp;(TARGET.HAS_CVMFS_uboone_osgstorage_org==true)'</jobsub>
+    <jobsub>--expected-lifetime=8h -f /pnfs/uboone/resilient/users/wgu/run_slimmed_port_overlay.fcl --tar_file_name=dropbox://$WCP_tarball --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)&amp;&amp;(TARGET.HAS_CVMFS_uboone_osgstorage_org==true)'</jobsub>
     <jobsub_start>--expected-lifetime=short --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)'</jobsub_start>
-    <initscript>$initscript</initscript>
+    <endscript>$endscript</endscript>
   </stage>
 
   <!-- file type -->
@@ -126,9 +128,9 @@ def execute(obj):
                          FHiCLs=fhicls,
                          inputlist=inputlist,
                          numjobs=numjobs,
-                         celltree_dataset=celltree_dataset,
+                         # celltree_dataset=celltree_dataset,
                          WCP_tarball=WCP_tarball,
-                         initscript=initscript)
+                         endscript=endscript)
   
   with open("%s.xml"%name,'w') as f:
     f.write(content) 
@@ -145,7 +147,6 @@ def execute(obj):
 #     one.update(cfg)  
 #     print('===')
 #     pp.pprint(one)
-
 
 # parse json context to project list
 import copy, pprint

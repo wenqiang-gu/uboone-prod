@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<!-- Production Project -->
+<!DOCTYPE project [
+<!ENTITY release "WCP-001404">
+<!ENTITY file_type "overlay">
+<!ENTITY run_type "physics">
+<!ENTITY user "wgu">
+<!ENTITY name "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaXZ_run3b">
+]>
+
+
+<job>
+
+<project name="&name;">
+
+  <!-- Project size -->
+  <numevents>200000</numevents>
+
+  <!-- Operating System -->
+  <os>SL7</os>
+
+  <!-- Batch resources -->
+  <resource>DEDICATED,OPPORTUNISTIC</resource>
+
+  <!-- Larsoft information -->
+  <larsoft>
+    <tag>v08_00_00_42</tag>
+    <qual>e17:prof</qual>
+    <local>/pnfs/uboone/resilient/users/hanyuwei/WCPport/nueDev/uboonecode_v08_00_00_42_Aug19.tar</local>
+  </larsoft>
+  
+  <check>1</check>
+  <!--copy>1</copy-->
+
+  <!-- Project stages -->
+  <stage name="portAll">
+    <fcl>/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl</fcl>
+
+    <outdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/reco</outdir>
+    <logdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/log</logdir>
+    <workdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/work</workdir>
+    <inputlist>prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaXZ_run3b.txt</inputlist>
+    <maxfilesperjob>1</maxfilesperjob>
+    <numjobs>1719</numjobs>
+    <memory>4000</memory> 
+    <schema>root</schema>
+    <jobsub>--expected-lifetime=8h -f /pnfs/uboone/resilient/users/wgu/run_slimmed_port_overlay.fcl --tar_file_name=dropbox:///pnfs/uboone/persistent/users/hanyuwei/resilient/WCPport/nueDev/WCP_v00_14_04.tar --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)&amp;&amp;(TARGET.HAS_CVMFS_uboone_osgstorage_org==true)'</jobsub>
+    <jobsub_start>--expected-lifetime=short --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)'</jobsub_start>
+    <endscript>endscript_OverlayWCP_reco1.5-reco2-LEE.sh</endscript>
+  </stage>
+
+  <!-- file type -->
+  <filetype>&file_type;</filetype>
+
+  <!-- run type -->
+  <runtype>&run_type;</runtype>
+
+</project>
+
+
+</job>

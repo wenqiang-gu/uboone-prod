@@ -1,0 +1,66 @@
+{
+  "file_type" : "overlay",
+  "release" : "WCP-001404",
+  "WCP_tarball" : "/pnfs/uboone/persistent/users/hanyuwei/resilient/WCPport/nueDev/WCP_v00_14_04.tar",
+  "larsoft_tarball" : "/pnfs/uboone/resilient/users/hanyuwei/WCPport/nueDev/uboonecode_v08_00_00_42_Aug19.tar",
+  "larsoft_tag" : "v08_00_00_42",
+  "larsoft_qual" : "e17:prof",
+  "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+  "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+  "WireModFHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+  "numjobs" : -1,
+  
+  "projects": [
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaXZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaXZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaYZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaYZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModX_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModX_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModYZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModYZ_run3b.txt"
+    }
+
+  ]
+
+}
+
+
