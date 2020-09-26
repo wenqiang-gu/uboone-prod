@@ -6,7 +6,7 @@
 <!ENTITY file_type "overlay">
 <!ENTITY run_type "physics">
 <!ENTITY user "wgu">
-<!ENTITY name "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModX_run3b">
+<!ENTITY name "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run1">
 ]>
 
 
@@ -35,14 +35,14 @@
 
   <!-- Project stages -->
   <stage name="portAll">
-    <fcl>/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl</fcl>
+    <fcl>/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl</fcl>
 
     <outdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/reco</outdir>
     <logdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/log</logdir>
     <workdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/work</workdir>
-    <inputlist>prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModX_run3b.txt</inputlist>
+    <inputlist>prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run1.txt</inputlist>
     <maxfilesperjob>1</maxfilesperjob>
-    <numjobs>2205</numjobs>
+    <numjobs>1996</numjobs>
     <memory>4000</memory> 
     <schema>root</schema>
     <jobsub>--expected-lifetime=8h -f /pnfs/uboone/resilient/users/wgu/run_slimmed_port_overlay.fcl --tar_file_name=dropbox:///pnfs/uboone/resilient/users/wgu/WCP_v00_14_07.tar --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)&amp;&amp;(TARGET.HAS_CVMFS_uboone_osgstorage_org==true)'</jobsub>

@@ -1,0 +1,192 @@
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run1",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run1.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run1",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run1.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run1",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run1.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run1",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run1.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run1",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run1.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run1",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run1.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run1_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run1_500k.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run1_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run1_500k.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run1_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run1_500k.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_Recomb2_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_Recomb2_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_SCE_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_SCE_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaXZ_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaXZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaYZ_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaYZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModX_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModX_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModYZ_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModYZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModdEdX_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModdEdX_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaXZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaXZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaYZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaYZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModX_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModX_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModYZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModYZ_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModdEdX_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModdEdX_run3b.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run3b_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run3b_500k.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b_500k.txt"
+    },
+
+
+    {
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b_500k.txt"
+    },
+

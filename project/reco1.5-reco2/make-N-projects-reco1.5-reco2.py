@@ -28,8 +28,6 @@ def execute(obj):
   larsoft_tag = obj["larsoft_tag"]  
   larsoft_qual =  obj["larsoft_qual"]
   FHiCLs =  obj["FHiCLs"]
-  if "WireMod".lower() in name.lower():
-    FHiCLs = obj["WireModFHiCLs"]
   endscript =  obj["endscript"]
   numjobs =  obj["numjobs"]
   

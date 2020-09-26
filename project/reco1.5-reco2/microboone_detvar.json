@@ -1,0 +1,270 @@
+{
+  "file_type" : "overlay",
+  "release" : "WCP-001407",
+  "WCP_tarball" : "/pnfs/uboone/resilient/users/wgu/WCP_v00_14_07.tar",
+  "larsoft_tarball" : "/pnfs/uboone/resilient/users/wgu/uboonecode_v08_00_00_42-0923-b.tar",
+  "larsoft_tag" : "v08_00_00_42",
+  "larsoft_qual" : "e17:prof",
+  "numjobs" : -1,
+  
+  "projects": [
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run1",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run1.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run1",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run1.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run1",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run1.txt"
+    },
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYDown_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_Recomb2_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_Recomb2_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_SCE_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_SCE_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_LYRayleigh_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaXZ_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaXZ_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaYZ_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModThetaYZ_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModX_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModX_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModYZ_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModYZ_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2-LEE.sh",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModdEdX_run3b",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_WireModdEdX_run3b.txt"
+    },
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run1",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run1.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run1",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run1.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run1",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run1.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run1_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run1_500k.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run1_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run1_500k.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run1_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run1_500k.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYDown_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_LYRayleigh_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaXZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaXZ_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaYZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModThetaYZ_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModX_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModX_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModYZ_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModYZ_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModdEdX_run3b",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_WireModdEdX_run3b.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run3b_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_CV-extra_run3b_500k.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_Recomb2_run3b_500k.txt"
+    },
+
+
+    {
+      "FHiCLs" : ["/pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_wiremod_port_prod.fcl"],
+      "endscript" : "endscript_OverlayWCP_reco1.5-reco2.sh",
+      "name": "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b_500k",
+      "inputlist" : "prodgenie_bnb_nu_overlay_WCP_DetVar_SCE_run3b_500k.txt"
+    }
+
+
+  ]
+
+}
+
+
