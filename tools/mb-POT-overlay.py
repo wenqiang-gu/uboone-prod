@@ -10,17 +10,24 @@ T_pot = infile.Get("wcpselection/T_pot")
 if not T_pot:
   print("Cannot get TTree with name T_pot.")
 
-RSPv = []
+RSPv = dict()
 for e in T_pot:
-  rsp = (e.runNo, e.subRunNo, e.pot_tor875)
-  if RSPv.count(rsp)==0:
-    RSPv.append(rsp)
+  if (e.runNo, e.subRunNo) not in RSPv:
+    RSPv[(e.runNo, e.subRunNo)] = [e.pot_tor875]
   else:
-    print("Duplicated entry for run %d, subrun %d" %(rsp[0], rsp[1]))
+    RSPv[(e.runNo, e.subRunNo)].append(e.pot_tor875)
+    print("Duplicated entry for run %d, subrun %d, pot %E" %(e.runNo, e.subRunNo, e.pot_tor875))
 
 
 total_pot = 0
-for run, subrun, pot in RSPv:
-  total_pot += pot
+for run, subrun in RSPv:
+  potvx = RSPv[(run,subrun)]
+  non_zero_potvx = [x for x in potvx if x > 0]
+  if len(non_zero_potvx)==0:
+    print("No valid POT entry for run %d, subrun %d" %(run,subrun))
+  elif len(non_zero_potvx)>1:
+    print("More than one valid POT entry for run %d, subrun %d" %(run, subrun))
+  else: # only one non-zero POT, good case
+    total_pot += non_zero_potvx[0]
 
 print("Total POT: %E" %total_pot)
