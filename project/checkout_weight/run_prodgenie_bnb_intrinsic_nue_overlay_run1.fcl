@@ -1,0 +1,98 @@
+#include "time_memory_tracker_microboone.fcl"
+#include "services_microboone.fcl"
+process_name: WCPcheckoutWgt
+
+services:
+{
+  TFileService: { fileName: "WCP_checkout_with_weights.root" }
+  TimeTracker:             @local::microboone_time_tracker
+  MemoryTracker:           @local::microboone_memory_tracker
+  #FileCatalogMetadata:     @local::art_file_catalog_mc
+  @table::microboone_services
+}
+
+source:
+{
+  module_type: RootInput
+  fileNames:   ["dummy.root"]
+  maxEvents:   -1
+}
+
+physics:
+{
+  analyzers:
+  {
+    wcpselection:
+    {
+      module_type:      "WCPcheckout"
+      ContainmentLabel: "nuselMetrics"
+      ChargeLabel:      "nuselMetrics"
+      TruthLabel:       "nuselMetrics"
+      MatchLabel:       "nuselMetrics"
+      STMLabel:       	"nuselMetricsSTM"
+      FileType:		"prodgenie_bnb_intrinsic_nue_overlay_run1"
+
+      MC:               true
+      SaveWeights:	true
+      SaveLeeWeights:	true
+      SaveFullWeights:	false
+
+      POT_counting:	true
+      POT_inputTag:	"generator" #this if for overlay. For data e.g. "beamdata:bnbETOR875"
+
+      ## Wire-Cell particle flow
+      wirecellPF:	true	
+      BDTvars:		true
+      KINEvars:		true
+      PF_validation: 	true
+      PF_inputtag:	"wirecellPF"
+      PFtruth_inputtag: "largeant"
+      Threshold_showerKE: 0.070 # units: GeV
+
+    }
+
+    wcpweights:
+    {
+      module_type:      "WCPweights"
+      STMLabel:       	"nuselMetricsSTM"
+      FileType:		"prodgenie_bnb_intrinsic_nue_overlay_run1"
+
+      SaveWeights:	true
+      SaveLeeWeights:	true
+      SaveFullWeights:	true
+
+    }
+
+  }
+
+  ana: [ wcpselection, wcpweights ]
+  end_paths: [ ana ]
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   dataTier: "reconstructed"
+   compressionLevel: 1
+   saveMemoryObjectThreshold: 0
+   fileName: "%ifb_%tc_WCPsl.root"
+ }
+}
+
+services.SpaceCharge.CalibrationInputFilename: "SpaceCharge/SCEoffsets_dataDriven_combined_bkwd_Jan18.root"
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true
+services.SpaceCharge.EnableCorrSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.InputFilename: "SpaceCharge/SCEoffsets_dataDriven_combined_fwd_Jan18.root"
+services.SpaceCharge.ResponseType: "Voxelized_TH3"
+services.SpaceCharge.service_provider: "SpaceChargeServiceMicroBooNE"
+services.DetectorPropertiesService.NumberTimeSamples: 6400
+services.DetectorPropertiesService.ReadOutWindowSize: 6400
+services.DetectorClocksService.TriggerOffsetTPC: -0.400e3
+services.DetectorClocksService.InheritClockConfig:  false
+#services.BackTrackerService:  @local::microboone_backtrackerservice
+#services.ParticleInventoryService: @local::standard_particleinventoryservice

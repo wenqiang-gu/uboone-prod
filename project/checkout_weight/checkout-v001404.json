@@ -1,0 +1,35 @@
+{
+  "file_type" : "overlay",
+  "release" : "WCP-001404",
+  "larsoft_tarball" : "/pnfs/uboone/resilient/users/wgu/uboonecode_v08_00_00_42-0929v2.tar",
+  "larsoft_tag" : "v08_00_00_42",
+  "larsoft_qual" : "e17:prof",
+  "numjobs" : 100,
+  
+  "projects": [
+
+
+    {
+      "MC" : "true",
+      "SaveWeights" : "true",
+      "SaveLeeWeights" : "true",
+      "SaveFullWeights" : "true",
+      "name": "prodgenie_bnb_intrinsic_nue_overlay_run1",
+      "inputlist" : "prodgenie_bnb_intrinsic_nue_overlay_run1.reco2"
+    },
+
+    {
+      "MC" : "true",
+      "SaveWeights" : "true",
+      "SaveLeeWeights" : "false",
+      "SaveFullWeights" : "true",
+      "name": "prodgenie_bnb_nu_overlay_run1",
+      "inputlist" : "prodgenie_bnb_nu_overlay_run1.reco2"
+    }
+
+
+  ]
+
+}
+
+
