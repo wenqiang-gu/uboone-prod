@@ -201,7 +201,6 @@ services.DetectorClocksService.InheritClockConfig:  false
     <logdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/log</logdir>
     <workdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/work</workdir>
     <inputlist>$inputlist</inputlist>
-    <maxfilesperjob>1</maxfilesperjob>
     <numjobs>$numjobs</numjobs>
     <memory>4000</memory> 
     <schema>root</schema>

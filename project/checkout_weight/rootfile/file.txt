@@ -1,0 +1,3 @@
+WCP_checkout_with_weights_1.root
+WCP_checkout_with_weights_2.root
+WCP_checkout_with_weights_3.root

@@ -6,7 +6,7 @@
 <!ENTITY file_type "overlay">
 <!ENTITY run_type "physics">
 <!ENTITY user "wgu">
-<!ENTITY name "prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b-chkout">
+<!ENTITY name "prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run3b-chkout">
 ]>
 
 
@@ -35,12 +35,11 @@
 
   <!-- Project stages -->
   <stage name="port2">
-    <fcl>/uboone/app/users/wgu/uboone-prod/project/checkout_weight/run_prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b.fcl</fcl>
+    <fcl>/uboone/app/users/wgu/uboone-prod/project/checkout_weight/scripts/run_prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run3b.fcl</fcl>
     <outdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/reco</outdir>
     <logdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/log</logdir>
     <workdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/work</workdir>
-    <inputlist>prodgenie_bnb_nu_overlay_WCP_DetVar_CV_run3b.reco2</inputlist>
-    <maxfilesperjob>1</maxfilesperjob>
+    <inputlist>prodgenie_bnb_intrinsic_nue_overlay_WCP_DetVar_CV_run3b.reco2</inputlist>
     <numjobs>100</numjobs>
     <memory>4000</memory> 
     <schema>root</schema>
