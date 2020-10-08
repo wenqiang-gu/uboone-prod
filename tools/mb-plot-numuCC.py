@@ -26,7 +26,7 @@ h5w = rt.TH1F("h5w","weight^2", 50, 0, 0.5)
 t1 = rt.TTree("t1","t1")
 t1.ReadFile(infile1, "entry/I:run/I:subrun/I:event/I:weight/D:status/I:post_generic/I:numuCC/I:nueBDT/I:is_FC/I:Ereco/D:Evis/D:truth_cosmic/I:truth_numuCC/I:truth_NC/I:truth_nue/I:truth_nuEnergy/D:pio_presel/I:pio_mass/D",',')
 for e in t1:
-  if e.status==1 and e.post_generic==1 and e.numuCC==1 and e.is_FC==1:
+  if e.status==1 and e.post_generic==1 and e.numuCC==1 and e.is_FC==0:
     h1.Fill(e.Ereco, e.weight) 
     h1w.Fill(e.Ereco, e.weight * e.weight) 
     if e.truth_numuCC==1: h2.Fill(e.Ereco, e.weight)
@@ -69,7 +69,7 @@ h6.GetXaxis().SetTitle('Ereco [GeV]')
 t2 = rt.TTree("t2","t2")
 t2.ReadFile(infile2, "entry/I:run/I:subrun/I:event/I:weight/D:status/I:post_generic/I:numuCC/I:nueBDT/I:is_FC/I:Ereco/D:Evis/D:truth_cosmic/I:truth_numuCC/I:truth_NC/I:truth_nue/I:truth_nuEnergy/D:pio_presel/I:pio_mass/D",',')
 for e in t2:
-  if e.status==1 and e.post_generic==1 and e.numuCC==1 and e.is_FC==1:
+  if e.status==1 and e.post_generic==1 and e.numuCC==1 and e.is_FC==0:
     h6.Fill(e.Ereco, e.weight) 
     h6w.Fill(e.Ereco, e.weight * e.weight) 
 
@@ -86,7 +86,7 @@ h7.GetXaxis().SetTitle('Ereco [GeV]')
 t3 = rt.TTree("t3","t3")
 t3.ReadFile(infile3, "entry/I:run/I:subrun/I:event/I:weight/D:status/I:post_generic/I:numuCC/I:nueBDT/I:is_FC/I:Ereco/D:Evis/D:truth_cosmic/I:truth_numuCC/I:truth_NC/I:truth_nue/I:truth_nuEnergy/D:pio_presel/I:pio_mass/D",',')
 for e in t3:
-  if e.status==1 and e.post_generic==1 and e.numuCC==1 and e.is_FC==1:
+  if e.status==1 and e.post_generic==1 and e.numuCC==1 and e.is_FC==0:
     h7.Fill(e.Ereco, e.weight) 
     h7w.Fill(e.Ereco, e.weight * e.weight) 
 
@@ -145,7 +145,7 @@ lg.AddEntry(h3, "#nu_{#mu} NC in FV (%d)" %h3.Integral(), "F")
 lg.Draw()
 
 
-ofile = rt.TFile("numuCC-reco-energy-FC.root","recreate")
+ofile = rt.TFile("numuCC-reco-energy-notFC.root","recreate")
 h1.SetName("overlay_ext")
 h1.Write()
 h6.SetName("bnb")

@@ -138,8 +138,8 @@ for e in tt:
     # T_eval::match_energy	 => Evis
     # T_BDTvars::mip_energy      => primary shower energy
     ###
-    numuCC = (e.numu_score > 0.9)
-    if not cosmic and numuCC:
+    # if not cosmic and numuCC:
+    if e.numu_score>0.9:
       lbldb.update_entry("numuCC", 1)
 
     ### nueCC

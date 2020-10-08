@@ -1,7 +1,7 @@
 #!/bin/bash
 ###
 # Modified from Hanyu's end- and init-script by Wenqiang
-# Instruction: 1) set the variables "input_artROOT" 
+# Instruction: 1) set the variables "input_artROOT" and "INPUT_TAR_FILE"
 #              2) when it's necessary change `run_celltreeub_overlay_port_prod.fcl`
 #                 to `run_celltreeub_overlay_wiremod_port_prod.fcl` entirely
 #
