@@ -1,0 +1,93 @@
+#include "time_memory_tracker_microboone.fcl"
+#include "services_microboone.fcl"
+#include "wcp_port.fcl"
+process_name: PortRedux2
+
+services:
+{
+  TimeTracker:             @local::microboone_time_tracker
+  MemoryTracker:           @local::microboone_memory_tracker
+  FileCatalogMetadata:     @local::art_file_catalog_data
+  @table::microboone_services_reco
+}
+
+source:
+{
+  module_type: RootInput
+  fileNames:   ["dummy.root"]
+  maxEvents:   -1
+}
+
+physics:
+{
+  producers:
+  {
+    portedThresholdhit: @local::standard_portedhits
+    nuselMetrics: @local::standard_nuselectionmetrics_data
+    portedFlash: @local::standard_portedflash
+    portedSpacePointsThreshold: @local::standard_portedspacepoints
+  }
+
+  reco: [ 
+	  portedThresholdhit,
+          nuselMetrics,
+          portedFlash,
+	  portedSpacePointsThreshold          
+	]
+  trigger_paths: [ reco ]
+
+  stream1: [ out1 ]
+  end_paths: [ stream1 ]
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   dataTier: "reconstructed"
+   compressionLevel: 1
+   saveMemoryObjectThreshold: 0
+   fileName: "%ifb_%tc_dataWCP.root"
+ }
+}
+
+microboone_tfile_metadata:
+{
+  JSONFileName:          ["reco_stage_2_hist.root.json"]
+  GenerateTFileMetadata: [true]
+  dataTier:              ["root-tuple"]
+  fileFormat:            ["root"]
+}
+
+source.inputCommands: [
+		        "keep *_*_*_*",
+			"drop sim::SimEnergyDeposits_largeant_*_*",
+			"drop sim::SimChannels_largeant_*_*",
+			"drop sim::AuxDetSimChannel_*_*_*",
+			"drop raw::OpDetWaveform_pmtreadoutnonoise_*_OverlayDetsim",
+			"drop crt::CRTSimData_crtdetsim_*_OverlayDetsim",
+			"drop crt::CRTHit_*_*_OverlayDetsim",
+			"drop *_*_mixer_DataOverlay",
+			"drop *_threshold_nfspl1_OverlayStage1a",
+			"drop recob::Wires_*nfspl1_*_*",
+			"drop recob::OpFlash_*_*_OverlayStage1a",
+			"drop recob::OpHit_*_*_OverlayStage1a"
+		      ]
+
+services.SpaceCharge.CalibrationInputFilename: "SpaceCharge/SCEoffsets_dataDriven_combined_bkwd_Jan18.root"
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true
+services.SpaceCharge.EnableCorrSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.InputFilename: "SpaceCharge/SCEoffsets_dataDriven_combined_fwd_Jan18.root"
+services.SpaceCharge.ResponseType: "Voxelized_TH3"
+services.SpaceCharge.service_provider: "SpaceChargeServiceMicroBooNE"
+services.DetectorPropertiesService.NumberTimeSamples: 6400
+services.DetectorPropertiesService.ReadOutWindowSize: 6400
+services.DetectorClocksService.TriggerOffsetTPC: -0.400e3
+services.DetectorClocksService.InheritClockConfig:  false
+services.TFileService.fileName: "reco_stage_2_hist.root"
+services.BackTrackerService:  @local::microboone_backtrackerservice
+services.ParticleInventoryService: @local::standard_particleinventoryservice

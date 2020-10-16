@@ -2,8 +2,8 @@
 ###
 # Modified from Hanyu's end- and init-script by Wenqiang
 # Instruction: 1) set the variables "input_artROOT" and "INPUT_TAR_FILE"
-#              2) when it's necessary change `run_celltreeub_overlay_port_prod.fcl`
-#                 to `run_celltreeub_overlay_wiremod_port_prod.fcl` entirely
+#              2) when it's necessary change `run_celltreeub_port_prod.fcl`
+#                 to `run_celltreeub_port_prod.fcl` entirely
 #
 
 source /cvmfs/uboone.opensciencegrid.org/products/setup_uboone.sh
@@ -22,7 +22,7 @@ date | tee -a wirecell.log
 
 
 # input_celltree=""
-input_artROOT="/pnfs/uboone/data/uboone/reconstructed/prod_v08_00_00_28/data_bnb_mcc9.1_wcp_port_TEST/reco1.5_C1/00/00/53/28/PhysicsRun-2016_3_6_3_49_2-0005328-00048_20160306T193701_bnb_20160306T214055_merged_20181106T073556_optfilter_20181221T164410_reco1_postwcct_postdl_20181221T172022_postwcct.root"
+input_artROOT="/pnfs/uboone/data/uboone/reconstructed/prod_v08_00_00_01/data_bnb_reco1_mcc9/bnb_G1/00/01/74/97/PhysicsRun-2018_7_2_3_20_24-0017497-00101_20180715T104019_bnb_1_20181207T044224_optfilter_20181224T122854_reco1_postwcct_postdl_20181224T124038.root"
 INPUT_TAR_FILE="/pnfs/uboone/resilient/users/wgu/WCP_v00_14_07.tar"
 # XROOTD_URI=""
 
@@ -37,10 +37,10 @@ ls -t *.root | tee -a wirecell.log
 echo $input_artROOT0 | tee -a wirecell.log
 mv $input_artROOT0 $input_artROOT
 
-cp /pnfs/uboone/resilient/users/wgu/run_celltreeub_overlay_port_prod.fcl .
-cat <<EOT >>  run_celltreeub_overlay_port_prod.fcl
+cp /pnfs/uboone/resilient/users/wgu/run_celltreeub_port_prod.fcl .
+cat <<EOT >>  run_celltreeub_port_prod.fcl
 services.FileCatalogMetadata.applicationVersion: "v08_00_00_42"
-services.FileCatalogMetadata.fileType: "overlay"
+services.FileCatalogMetadata.fileType: "data"
 services.FileCatalogMetadata.runType: "physics"
 services.FileCatalogMetadataMicroBooNE: {
 FCLName: "" # "run_celltreeub_overlay_wiremod_port_prod.fcl"
@@ -50,15 +50,15 @@ ProjectStage: "" # "portAll"
 ProjectVersion: "" # "v08_00_00_42"
 }
 services.TFileMetadataMicroBooNE: {
-  JSONFileName:          [ "celltreeOVERLAY.root.json", "nuselOVERLAY_WCP.root.json"]
+  JSONFileName:          [ "celltreeDATA.root.json", "nuselDATA_WCP.root.json"]
   GenerateTFileMetadata: [ true, true ]
   dataTier:              [ "celltree", "celltree" ]
   fileFormat:            [ "root", "root" ]
 }
 EOT
-lar -n -1 -c run_celltreeub_overlay_port_prod.fcl $input_artROOT | tee -a wirecell.log
+lar -n -1 -c run_celltreeub_port_prod.fcl $input_artROOT | tee -a wirecell.log
 
-input_celltree=`ls celltreeOVERLAY*.root | xargs | awk '{print $1}'`
+input_celltree=`ls celltreeDATA*.root | xargs | awk '{print $1}'`
 if [ ! -e "$input_celltree" ]; then
 	echo "Celltree root not found!" | tee -a wirecell.log
 	exit 201 
@@ -101,7 +101,7 @@ if [ ! -e "$input_artROOT" ]; then
 fi
 
 # eventcount=5
-eventcount=`grep event_count celltreeOVERLAY*.json | awk '{print substr($2, 1, length($2)-1)}'`
+eventcount=`grep event_count celltreeDATA*.json | awk '{print substr($2, 1, length($2)-1)}'`
 echo "eventcount:" $eventcount | tee -a wirecell.log
 if [ $eventcount -eq 0 ]; then
 	exit 0
@@ -131,7 +131,7 @@ date | tee -a ../wirecell.log
 for ((n=0; n<$(($eventcount)); n++))
 do
 	echo "$n event processing starts." | tee -a ../wirecell.log
-	wire-cell-imaging-lmem-celltree ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d1 -s2 2>&1 | tee -a ../wirecell.log
+	wire-cell-imaging-lmem-celltree ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 -s2 2>&1 | tee -a ../wirecell.log
 	echo "$n event imaging finished." | tee -a ../wirecell.log
 	echo "$n event matching starts."
 	for imagingfile in result*.root
@@ -143,7 +143,7 @@ do
 		echo $input2 | tee -a ../wirecell.log
 		mv $imagingfile imaging_$input2.root
 		#prod-nusel-eval ./input_data_files/ChannelWireGeometry_v2.txt imaging_$input2.root -d1 -p1 2>&1 | tee -a ../wirecell.log
-		prod-wire-cell-matching-nusel ./input_data_files/ChannelWireGeometry_v2.txt imaging_$input2.root -d1 -z1 2>&1 | tee -a ../wirecell.log
+		prod-wire-cell-matching-nusel ./input_data_files/ChannelWireGeometry_v2.txt imaging_$input2.root -d0 2>&1 | tee -a ../wirecell.log
 		### Exception: "No points! Quit!" -- this is a "warning" instead of "error"!
 		warning=`tail -n 1 ../wirecell.log`
 		echo "$warning"
@@ -173,11 +173,11 @@ bookkeep=${inputfilebase%.*}
 echo "Merge output" | tee -a ../wirecell.log
 ls *.root
 hadd merge.root ./port_*.root
-hadd nuselOVERLAY_WCP.root ./nuselEval_*.root
+hadd nuselDATA_WCP.root ./nuselEval_*.root
 
 echo "++++++++++++++++++++++++++++"
 echo "start reco 2"
-input_celltree="nuselOVERLAY_WCP.root" # not a celltree any more
+input_celltree="nuselDATA_WCP.root" # not a celltree any more
 
 date | tee -a ../wirecell.log
 touch WCP_STM.log
@@ -185,7 +185,7 @@ touch WCP_analysis.log
 for ((n=0; n<$(($eventcount)); n++))
 do
 	echo "$n event processing starts." | tee -a ../wirecell.log
-	wire-cell-prod-stm ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 -o0 -g2 -z1 2>&1 | tee -a ../wirecell.log
+	wire-cell-prod-stm ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 -o0 -g2 2>&1 | tee -a ../wirecell.log
 	echo "$n event processing finished." | tee -a ../wirecell.log
 	echo "$n event cosmic rejection starts." | tee -a ../wirecell.log
 	for stmfile in stm*.root
@@ -220,7 +220,7 @@ do
                 #event=`echo $runinfo | awk -F "_" '{print $3}'`
 
 		echo "$n event nue starts." | tee -a WCP_analysis.log	
-		wire-cell-prod-nue ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 -z1 2>&1 | tee -a WCP_analysis.log
+		wire-cell-prod-nue ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 2>&1 | tee -a WCP_analysis.log
 		echo "$n event nue finished." | tee -a WCP_analysis.log	
 	
 		if [ ! -e nue_${input2}.root ]; then
@@ -262,7 +262,7 @@ echo "+++++++++++++++++++++++++++++"
 
 
 #mv imaging*.root $workdir
-mv nuselOVERLAY_WCP.root $workdir
+mv nuselDATA_WCP.root $workdir
 mv merge.root $workdir
 
 cd $workdir
@@ -281,14 +281,14 @@ echo "art port"
 # laststagefcl=`ls -l Stage*.fcl | xargs | awk '{print $NF}'`
 # sed -e "s/run_celltreeub\(.*\).fcl/run_slimmed_port_overlay.fcl/g" -e "s/FCLName:.*\"/FCLName: \"run_slimmed_port_overlay.fcl\"/g" $laststagefcl > port.fcl #multiple fhicls/stages, use the celltree one (last one) to generate the port stage fcl including all necessary metadata
 
-cp /pnfs/uboone/resilient/users/wgu/run_slimmed_port_overlay.fcl .
-lar -c run_slimmed_port_overlay.fcl -n -1 -s $input_artROOT | tee -a wirecell.log
+cp /pnfs/uboone/resilient/users/wgu/run_slimmed_port_data.fcl .
+lar -c run_slimmed_port_data.fcl -n -1 -s $input_artROOT | tee -a wirecell.log
 rm $input_artROOT
 
 
 echo "+++++++++++++++++++++++++++++"
 echo "start reco 2 (2nd time)"
-input_artROOT0=`ls -t *overlayWCP.root | xargs | awk '{print $1}'` # find the last artROOT file
+input_artROOT0=`ls -t *dataWCP.root | xargs | awk '{print $1}'` # find the last artROOT file
 ls -t *.root | tee -a wirecell.log
 echo $input_artROOT0 | tee -a wirecell.log
 mv $input_artROOT0 $input_artROOT
@@ -300,12 +300,6 @@ echo $input_artROOT0 | tee -a wirecell.log
 mv $input_artROOT0 $input_artROOT
 lar -n -1 -c run_wcpf_port.fcl -s $input_artROOT | tee -a wirecell.log
 
-
-input_artROOT0=`ls -t *WCPF.root | xargs | awk '{print $1}'` # find the last artROOT file
-ls -t *.root | tee -a wirecell.log
-echo $input_artROOT0 | tee -a wirecell.log
-mv $input_artROOT0 $input_artROOT
-lar -n -1 -c run_eventweight_microboone_mar18.fcl -s $input_artROOT | tee -a wirecell.log
 
 echo "end reco 2 (2nd time)"
 echo "+++++++++++++++++++++++++++++"

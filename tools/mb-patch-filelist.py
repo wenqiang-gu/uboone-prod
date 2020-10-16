@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 '''
 Usage: mb-patch-filelist.py #list1 #list2 #outputName
-Output: list2.ext
 
-Description: list2 is a production based on list1. However, some files failed, we
+Description: list2 is from a production based on list1. However, some files failed, we
 would like to re-run the prodcution for these files. So we need to find them from
-the #list1 as the file names from #list1 and #list2 have the best match.
+the #list1 by assuming the file names from #list1 and #list2 can have some match.
 '''
 
 import os,sys
@@ -18,7 +17,7 @@ def find_best_match_name(set1, name1):
     if len(common_prefix) > best_match_length:
       best_match_name = name
       best_match_length = len(common_prefix)
-  return best_match_name
+  return (best_match_name, best_match_length)
 
 infile1 = sys.argv[1]
 infile2 = sys.argv[2]
@@ -47,8 +46,9 @@ with open(infile2) as f2:
 
 bm_names = list()
 for name in basename_2:
-  name1 = find_best_match_name(basename_1, name)
+  name1, length1 = find_best_match_name(basename_1, name)
   bm_names.append(name1)
+  if length1<100: print(name1, name)
 
 with open(ofile,'w') as f:
   for name in basename_1:

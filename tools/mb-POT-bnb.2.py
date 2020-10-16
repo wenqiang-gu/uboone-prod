@@ -5,19 +5,35 @@ filename = sys.argv[1]
 
 import ROOT as rt
 infile = rt.TFile(filename)
-T_eval = infile.Get("wcpselection/T_eval")
 
-if not T_eval:
-  print("Cannot get TTree with name T_eval.")
+## 
+# CAVEAT: T_pot tree is more precise for subrun look up
+#         In some rare case, a subrun has no triggerred events
+#
+# T_eval = infile.Get("wcpselection/T_eval")
+# if not T_eval:
+#   print("Cannot get TTree with name T_eval.")
+# RSPv = []
+# for e in T_eval:
+#   rsp = (e.run, e.subrun)
+#   if RSPv.count(rsp)==0:
+#     RSPv.append(rsp)
+#   # else:
+#   #   print("Duplicated entry for run %d, subrun %d" %(rsp[0], rsp[1]))
+# 
+# print("# of subruns (T_eval): %d" %len(RSPv))
 
+T_pot = infile.Get("wcpselection/T_pot")
+if not T_pot:
+  print("Cannot get TTree with name T_pot.")
 RSPv = []
-for e in T_eval:
-  rsp = (e.run, e.subrun)
+for e in T_pot:
+  rsp = (e.runNo, e.subRunNo)
   if RSPv.count(rsp)==0:
     RSPv.append(rsp)
   # else:
   #   print("Duplicated entry for run %d, subrun %d" %(rsp[0], rsp[1]))
-
+# print("# of subruns (T_pot): %d" %len(RSPv2))
 
 print("Save %d lines to rslist.txt" %len(RSPv))
 rslistfile = open('rslist.txt','w')

@@ -64,6 +64,9 @@ fi
 eventcount=`grep event_count celltreeOVERLAY*.json | awk '{print substr($2, 1, length($2)-1)}'`
 # eventcount=1
 echo "eventcount:" $eventcount | tee -a wirecell.log
+if [ $eventcount -eq 0 ]; then
+	exit 0
+fi
 
 echo "Make WCP work directory" | tee -a wirecell.log
 echo `pwd`

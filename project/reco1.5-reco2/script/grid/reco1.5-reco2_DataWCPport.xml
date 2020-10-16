@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!-- Production Project -->
+
+<!DOCTYPE project [
+<!ENTITY release "WCP-001407">
+<!ENTITY file_type "data">
+<!ENTITY run_type "physics">
+<!ENTITY user "wgu">
+<!ENTITY name "data_bnb_run3_1e19">
+]>
+
+
+<job>
+
+<project name="&name;">
+
+  <!-- Project size -->
+  <numevents>200000</numevents>
+
+  <!-- Operating System -->
+  <os>SL7</os>
+
+  <!-- Batch resources -->
+  <resource>DEDICATED,OPPORTUNISTIC</resource>
+
+  <!-- Larsoft information -->
+  <larsoft>
+    <tag>v08_00_00_42</tag>
+    <qual>e17:prof</qual>
+    <local>/pnfs/uboone/resilient/users/wgu/uboonecode_v08_00_00_42-1010.tar</local>
+  </larsoft>
+  
+  <check>1</check>
+
+  <!-- Project stages -->
+  <stage name="portAll">
+    <fcl>filter_data_beamdata_beamdataquality.fcl</fcl>
+    <fcl>/pnfs/uboone/resilient/users/wgu/run_celltreeub_port_prod.fcl</fcl>
+    <outdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/reco</outdir>
+    <logdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/log</logdir>
+    <workdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/work</workdir>
+    <inputlist>/uboone/data/users/wgu/uboone-prod/project/reco1.5-reco2/script/interactive/data_bnb_run3_1e19.reco1.txt</inputlist> 
+    <maxfilesperjob>1</maxfilesperjob>
+    <!--numjobs>50</numjobs-->
+    <numjobs>3100</numjobs>
+    <defname>&name;_run3_reco1.5_reco2</defname>
+    <datatier>reconstructed</datatier>
+    <memory>4000</memory> 
+    <schema>root</schema>
+    <jobsub>--expected-lifetime=12h -f /pnfs/uboone/resilient/users/wgu/run_slimmed_port_data.fcl --tar_file_name=dropbox:///pnfs/uboone/resilient/users/wgu/WCP_v00_14_07.tar --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)&amp;&amp;(TARGET.HAS_CVMFS_uboone_osgstorage_org==true)'</jobsub>
+    <jobsub_start>--expected-lifetime=short --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)'</jobsub_start>
+    <endscript>endscript_DataWCP_reco1.5-reco2.sh</endscript>
+  </stage>
+
+  <!-- file type -->
+  <filetype>&file_type;</filetype>
+
+  <!-- run type -->
+  <runtype>&run_type;</runtype>
+
+</project>
+
+</job>

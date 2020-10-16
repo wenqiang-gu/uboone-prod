@@ -26,7 +26,8 @@ for run, subrun in RSPv:
   if len(non_zero_potvx)==0:
     print("No valid POT entry for run %d, subrun %d" %(run,subrun))
   elif len(non_zero_potvx)>1:
-    print("More than one valid POT entry for run %d, subrun %d" %(run, subrun))
+    print("More than one valid POT entry for run %d, subrun %d: (1st & 2nd) %f %f" %(run, subrun, non_zero_potvx[0]/1E19, non_zero_potvx[1]/1E19))
+    total_pot += non_zero_potvx[0]
   else: # only one non-zero POT, good case
     total_pot += non_zero_potvx[0]
 

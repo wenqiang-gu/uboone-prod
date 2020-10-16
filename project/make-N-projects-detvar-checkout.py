@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from string import Template
 import json, sys
+import os
 
 
 # parst object to project xml
@@ -14,7 +15,6 @@ def execute(obj):
   # larsoft_tarball = "/pnfs/uboone/resilient/users/hanyuwei/WCPport/nueDev/uboonecode_v08_00_00_42_Aug19.tar"
   # larsoft_tag = "v08_00_00_42"
   # larsoft_qual = "e17:prof"
-  # FHiCLs = ["run_wcpplus_port.fcl", "run_wcpf_port.fcl", "run_eventweight_microboone_mar18.fcl", "run_eventweight_microboone_LEE.fcl"] #, "/uboone/app/users/wgu/NuSel/Validation/spool/run_WCPcheckout.fcl"]
   # initscript = "/uboone/app/users/wgu/NuSel/Validation/spool/initscript_wcpplus_inputlist.sh"
   # numjobs = -1 # -1: all jobs
 
@@ -22,16 +22,19 @@ def execute(obj):
   file_type = obj["file_type"]
   name = obj["name"]
   inputlist = obj["inputlist"]
-  celltree_dataset = obj["celltree_dataset"]  
-  WCP_tarball = obj["WCP_tarball"]  
   larsoft_tarball = obj["larsoft_tarball"]  
   larsoft_tag = obj["larsoft_tag"]  
   larsoft_qual =  obj["larsoft_qual"]
-  FHiCLs =  obj["FHiCLs"]
-  initscript =  obj["initscript"]
   numjobs =  obj["numjobs"]
   
-  
+  POT_inputTag = "generator"
+  if file_type == "data":
+    POT_inputTag = "beamdata:bnbETOR875"
+  MC = obj["MC"]
+  SaveWeights = obj["SaveWeights"]
+  SaveLeeWeights = obj["SaveLeeWeights"]
+  SaveFullWeights = obj["SaveFullWeights"]
+
   # set numjobs
   non_blank_count = 0
   with open(inputlist) as f:
@@ -41,16 +44,107 @@ def execute(obj):
   if numjobs<0 or numjobs>non_blank_count:
     numjobs = non_blank_count
   
-  # set fhicls
-  fhicls = ""
-  for fcl in FHiCLs:
-    fhicls += "<fcl>%s</fcl>\n" %fcl
-  
-  # check celltree def name
-  if not celltree_dataset.endswith("celltree"):
-    print("Error! CellTree dataset name should end with ``celltree``")
-    exit()
-  
+  # template for run_WCPcheckoutWgt.fcl
+  temp_content1 =  \
+'''#include "time_memory_tracker_microboone.fcl"
+#include "services_microboone.fcl"
+process_name: WCPcheckout
+
+services:
+{
+  TFileService: { fileName: "WCP_checkout.root" }
+  TimeTracker:             @local::microboone_time_tracker
+  MemoryTracker:           @local::microboone_memory_tracker
+  #FileCatalogMetadata:     @local::art_file_catalog_mc
+  @table::microboone_services
+}
+
+source:
+{
+  module_type: RootInput
+  fileNames:   ["dummy.root"]
+  maxEvents:   -1
+}
+
+physics:
+{
+  analyzers:
+  {
+    wcpselection:
+    {
+      module_type:      "WCPcheckout"
+      ContainmentLabel: "nuselMetrics"
+      ChargeLabel:      "nuselMetrics"
+      TruthLabel:       "nuselMetrics"
+      MatchLabel:       "nuselMetrics"
+      STMLabel:       	"nuselMetricsSTM"
+      FileType:		"$name"
+
+      MC:               $MC
+      SaveWeights:	$SaveWeights
+      SaveLeeWeights:	$SaveLeeWeights
+      SaveFullWeights:	$SaveFullWeights
+
+      POT_counting:	true
+      POT_inputTag:	"generator" #this if for overlay. For data e.g. "beamdata:bnbETOR875"
+
+      ## Wire-Cell particle flow
+      wirecellPF:	true	
+      BDTvars:		true
+      KINEvars:		true
+      PF_validation: 	true
+      PF_inputtag:	"wirecellPF"
+      PFtruth_inputtag: "largeant"
+      Threshold_showerKE: 0.070 # units: GeV
+
+    }
+
+  }
+
+  ana: [ wcpselection ]
+  end_paths: [ ana ]
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   dataTier: "reconstructed"
+   compressionLevel: 1
+   saveMemoryObjectThreshold: 0
+   fileName: "%ifb_%tc_WCPsl.root"
+ }
+}
+
+services.SpaceCharge.CalibrationInputFilename: "SpaceCharge/SCEoffsets_dataDriven_combined_bkwd_Jan18.root"
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true
+services.SpaceCharge.EnableCorrSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.InputFilename: "SpaceCharge/SCEoffsets_dataDriven_combined_fwd_Jan18.root"
+services.SpaceCharge.ResponseType: "Voxelized_TH3"
+services.SpaceCharge.service_provider: "SpaceChargeServiceMicroBooNE"
+services.DetectorPropertiesService.NumberTimeSamples: 6400
+services.DetectorPropertiesService.ReadOutWindowSize: 6400
+services.DetectorClocksService.TriggerOffsetTPC: -0.400e3
+services.DetectorClocksService.InheritClockConfig:  false
+#services.BackTrackerService:  @local::microboone_backtrackerservice
+#services.ParticleInventoryService: @local::standard_particleinventoryservice
+'''
+
+  t = Template(temp_content1)
+  content = t.substitute(name=name,
+                         MC=MC,
+                         SaveWeights=SaveWeights,
+                         SaveLeeWeights=SaveLeeWeights,
+                         SaveFullWeights=SaveFullWeights)
+  with open("run_%s.fcl"%name,'w') as f:
+    f.write(content) 
+
+
+
   # template for project xml
   temp_content =  \
 '''<?xml version="1.0"?>
@@ -61,7 +155,7 @@ def execute(obj):
 <!ENTITY file_type "$file_type">
 <!ENTITY run_type "physics">
 <!ENTITY user "wgu">
-<!ENTITY name "$name">
+<!ENTITY name "$name-chkout">
 ]>
 
 
@@ -70,7 +164,7 @@ def execute(obj):
 <project name="&name;">
 
   <!-- Project size -->
-  <numevents>200000</numevents>
+  <numevents>2000000</numevents>
 
   <!-- Operating System -->
   <os>SL7</os>
@@ -90,18 +184,16 @@ def execute(obj):
 
   <!-- Project stages -->
   <stage name="port2">
-    $FHiCLs
+    <fcl>$cwd/run_$name.fcl</fcl>
     <outdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/reco</outdir>
     <logdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/log</logdir>
     <workdir>/pnfs/uboone/scratch/users/&user;/&release;/&name;/port/work</workdir>
     <inputlist>$inputlist</inputlist>
-    <maxfilesperjob>1</maxfilesperjob>
     <numjobs>$numjobs</numjobs>
     <memory>4000</memory> 
     <schema>root</schema>
-    <jobsub>--expected-lifetime=8h -e WCP_celltree_dataset=$celltree_dataset --tar_file_name=dropbox://$WCP_tarball --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)&amp;&amp;(TARGET.HAS_CVMFS_uboone_osgstorage_org==true)'</jobsub>
+    <jobsub>--expected-lifetime=8h --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)&amp;&amp;(TARGET.HAS_CVMFS_uboone_osgstorage_org==true)'</jobsub>
     <jobsub_start>--expected-lifetime=short --append_condor_requirements='(TARGET.HAS_CVMFS_uboone_opensciencegrid_org==true)'</jobsub_start>
-    <initscript>$initscript</initscript>
   </stage>
 
   <!-- file type -->
@@ -123,15 +215,15 @@ def execute(obj):
                          larsoft_tag=larsoft_tag,
                          larsoft_qual=larsoft_qual,
                          larsoft_tarball=larsoft_tarball,
-                         FHiCLs=fhicls,
                          inputlist=inputlist,
                          numjobs=numjobs,
-                         celltree_dataset=celltree_dataset,
-                         WCP_tarball=WCP_tarball,
-                         initscript=initscript)
+                         cwd=os.getcwd())
   
   with open("%s.xml"%name,'w') as f:
     f.write(content) 
+
+
+
 
 # # parse json context to project list
 # import copy, pprint
