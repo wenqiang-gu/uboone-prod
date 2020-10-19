@@ -64,6 +64,9 @@ fi
 eventcount=`grep event_count celltreeOVERLAY*.json | awk '{print substr($2, 1, length($2)-1)}'`
 # eventcount=1
 echo "eventcount:" $eventcount | tee -a wirecell.log
+if [ $eventcount -eq 0 ]; then
+	exit 0
+fi
 
 echo "Make WCP work directory" | tee -a wirecell.log
 echo `pwd`
@@ -137,8 +140,9 @@ echo "++++++++++++++++++++++++++++"
 echo "start reco 2"
 input_celltree="nuselOVERLAY_WCP.root" # not a celltree any more
 
-xx <= nulseldummy*root
-eventcount=$eventcount - xx
+# update the eventcount when it exists dummy files from reco 1.5
+N_nuseldummy=$(ls nulseldummy*root | wc -l)
+eventcount=$((eventcount-N_nuseldummy))
 
 date | tee -a ../wirecell.log
 touch WCP_STM.log

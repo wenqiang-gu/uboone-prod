@@ -104,7 +104,7 @@ do
 		echo $input2 | tee -a ../wirecell.log
 		mv $imagingfile imaging_$input2.root
 		#prod-nusel-eval ./input_data_files/ChannelWireGeometry_v2.txt imaging_$input2.root -d1 -p1 2>&1 | tee -a ../wirecell.log
-		prod-wire-cell-matching-nusel ./input_data_files/ChannelWireGeometry_v2.txt imaging_$input2.root -d1 -z1 2>&1 | tee -a ../wirecell.log
+		prod-wire-cell-matching-nusel ./input_data_files/ChannelWireGeometry_v2.txt imaging_$input2.root -d1 2>&1 | tee -a ../wirecell.log
 		### Exception: "No points! Quit!" -- this is a "warning" instead of "error"!
 		warning=`tail -n 1 ../wirecell.log`
 		echo "$warning"
@@ -140,13 +140,17 @@ echo "++++++++++++++++++++++++++++"
 echo "start reco 2"
 input_celltree="nuselOVERLAY_WCP.root" # not a celltree any more
 
+# update the eventcount when it exists dummy files from reco 1.5
+N_nuseldummy=$(ls nulseldummy*root | wc -l)
+eventcount=$((eventcount-N_nuseldummy))
+
 date | tee -a ../wirecell.log
 touch WCP_STM.log
 touch WCP_analysis.log
 for ((n=0; n<$(($eventcount)); n++))
 do
 	echo "$n event processing starts." | tee -a ../wirecell.log
-	wire-cell-prod-stm ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 -o0 -g2 -z1 2>&1 | tee -a ../wirecell.log
+	wire-cell-prod-stm ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 -o0 -g2 2>&1 | tee -a ../wirecell.log
 	echo "$n event processing finished." | tee -a ../wirecell.log
 	echo "$n event cosmic rejection starts." | tee -a ../wirecell.log
 	for stmfile in stm*.root
@@ -181,11 +185,12 @@ do
                 #event=`echo $runinfo | awk -F "_" '{print $3}'`
 
 		echo "$n event nue starts." | tee -a WCP_analysis.log	
-		wire-cell-prod-nue ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 -z1 2>&1 | tee -a WCP_analysis.log
+		wire-cell-prod-nue ./input_data_files/ChannelWireGeometry_v2.txt $input_celltree $n -d0 2>&1 | tee -a WCP_analysis.log
 		echo "$n event nue finished." | tee -a WCP_analysis.log	
 	
 		if [ ! -e nue_${input2}.root ]; then
 			echo "++> $input2 no output." | tee -a WCP_analysis.log
+			exit 205
 		else	
 			echo "$n event analysis starts." | tee -a WCP_analysis.log
 			IFS=$'\n' #dviding symbol

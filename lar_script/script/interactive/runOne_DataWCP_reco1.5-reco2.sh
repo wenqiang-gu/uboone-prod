@@ -1,6 +1,14 @@
 #!/bin/bash
+###
+# Modified from Hanyu's end- and init-script by Wenqiang
+# Instruction: 1) set the variables "input_artROOT" and "INPUT_TAR_FILE"
+#              2) when it's necessary change `run_celltreeub_port_prod.fcl`
+#                 to `run_celltreeub_port_prod.fcl` entirely
+#
+
 source /cvmfs/uboone.opensciencegrid.org/products/setup_uboone.sh
 #setup sam_web_client
+
 
 workdir=`pwd`
 touch wirecell.log
@@ -13,9 +21,42 @@ echo $UBOONECODE_VERSION | tee -a wirecell.log
 date | tee -a wirecell.log
 
 
-input_celltree=""
-input_artROOT=""
-XROOTD_URI=""
+# input_celltree=""
+input_artROOT="/pnfs/uboone/data/uboone/reconstructed/prod_v08_00_00_01/data_bnb_reco1_mcc9/bnb_G1/00/01/74/97/PhysicsRun-2018_7_2_3_20_24-0017497-00101_20180715T104019_bnb_1_20181207T044224_optfilter_20181224T122854_reco1_postwcct_postdl_20181224T124038.root"
+INPUT_TAR_FILE="/pnfs/uboone/resilient/users/wgu/WCP_v00_14_07.tar"
+# XROOTD_URI=""
+
+cp $input_artROOT .
+input_artROOT=`basename $input_artROOT`
+
+
+lar -n -1 -c filter_data_beamdata_beamdataquality.fcl $input_artROOT | tee -a wirecell.log
+
+input_artROOT0=`ls -t *filter.root | xargs | awk '{print $1}'` # find the last artROOT file
+ls -t *.root | tee -a wirecell.log
+echo $input_artROOT0 | tee -a wirecell.log
+mv $input_artROOT0 $input_artROOT
+
+cp /pnfs/uboone/resilient/users/wgu/run_celltreeub_port_prod.fcl .
+cat <<EOT >>  run_celltreeub_port_prod.fcl
+services.FileCatalogMetadata.applicationVersion: "v08_00_00_42"
+services.FileCatalogMetadata.fileType: "data"
+services.FileCatalogMetadata.runType: "physics"
+services.FileCatalogMetadataMicroBooNE: {
+FCLName: "" # "run_celltreeub_overlay_wiremod_port_prod.fcl"
+FCLVersion: "" # "v08_00_00_42"
+ProjectName: "" # "DetVar_nu_overlay_WireModThetaYZ_run3b_reco1.5-reco2"
+ProjectStage: "" # "portAll"
+ProjectVersion: "" # "v08_00_00_42"
+}
+services.TFileMetadataMicroBooNE: {
+  JSONFileName:          [ "celltreeDATA.root.json", "nuselDATA_WCP.root.json"]
+  GenerateTFileMetadata: [ true, true ]
+  dataTier:              [ "celltree", "celltree" ]
+  fileFormat:            [ "root", "root" ]
+}
+EOT
+lar -n -1 -c run_celltreeub_port_prod.fcl $input_artROOT | tee -a wirecell.log
 
 input_celltree=`ls celltreeDATA*.root | xargs | awk '{print $1}'`
 if [ ! -e "$input_celltree" ]; then
@@ -35,19 +76,19 @@ echo "celltree input: $input_celltree" | tee -a wirecell.log
 #input_artROOT=${input_artROOT0%_detsim*}".root" #change parent file name. Be aware of how many fcls/stages run
 #mv $input_artROOT0 $input_artROOT
 
-# This is a better method
-CPID=`cat cpid.txt`
-input_artROOT=($(ifdh translateConstraints "consumer_process_id=$CPID and consumed_status consumed"))
-stat=$?
-if [ $stat -ne 0 ]; then
-	if [ -f condor_lar_input.list ]; then
-        	input_artROOT=`cat condor_lar_input.list | xargs basename`
-	else
-		echo "Failed to determine inputfile name!" | tee -a wirecell.log
-     		exit 202
-	fi
-fi
-echo "Input artROOT: $input_artROOT found!" | tee -a wirecell.log
+# # This is a better method
+# CPID=`cat cpid.txt`
+# input_artROOT=($(ifdh translateConstraints "consumer_process_id=$CPID and consumed_status consumed"))
+# stat=$?
+# if [ $stat -ne 0 ]; then
+# 	if [ -f condor_lar_input.list ]; then
+#         	input_artROOT=`cat condor_lar_input.list | xargs basename`
+# 	else
+# 		echo "Failed to determine inputfile name!" | tee -a wirecell.log
+#      		exit 202
+# 	fi
+# fi
+# echo "Input artROOT: $input_artROOT found!" | tee -a wirecell.log
 
 input_artROOT0=`ls -t *.root | xargs | awk '{print $2}'` # the 2nd last one is the artROOT (since the last one is celltree.root)
 ls -t *.root | tee -a wirecell.log
@@ -59,10 +100,8 @@ if [ ! -e "$input_artROOT" ]; then
 	exit 203
 fi
 
-#eventcount=5
-### event_count: 5, 
+# eventcount=5
 eventcount=`grep event_count celltreeDATA*.json | awk '{print substr($2, 1, length($2)-1)}'`
-# eventcount=1
 echo "eventcount:" $eventcount | tee -a wirecell.log
 if [ $eventcount -eq 0 ]; then
 	exit 0
@@ -140,6 +179,10 @@ echo "++++++++++++++++++++++++++++"
 echo "start reco 2"
 input_celltree="nuselDATA_WCP.root" # not a celltree any more
 
+# update the eventcount when it exists dummy files from reco 1.5
+N_nuseldummy=$(ls nulseldummy*root | wc -l)
+eventcount=$((eventcount-N_nuseldummy))
+
 date | tee -a ../wirecell.log
 touch WCP_STM.log
 touch WCP_analysis.log
@@ -186,6 +229,7 @@ do
 	
 		if [ ! -e nue_${input2}.root ]; then
 			echo "++> $input2 no output." | tee -a WCP_analysis.log
+			exit 205
 		else	
 			echo "$n event analysis starts." | tee -a WCP_analysis.log
 			IFS=$'\n' #dviding symbol
@@ -238,12 +282,12 @@ echo "art port"
 #sed -i "s/_detsim_mix.root/.root/g" nusel*.root.json
 
 #make a new wrapper.fcl (Stage?.fcl)
-# find the last stage
-laststagefcl=`ls -l Stage*.fcl | xargs | awk '{print $NF}'`
-sed -e "s/run_celltreeub\(.*\).fcl/run_slimmed_port_data.fcl/g" -e "s/FCLName:.*\"/FCLName: \"run_slimmed_port_data.fcl\"/g" $laststagefcl > port.fcl #multiple fhicls/stages, use the celltree one (last one) to generate the port stage fcl including all necessary metadata
-# copy fhicl
-cp $CONDOR_DIR_INPUT/run_slimmed_port_data.fcl .
-lar -c port.fcl -n 200000 -s $input_artROOT | tee -a wirecell.log
+## find the last stage
+# laststagefcl=`ls -l Stage*.fcl | xargs | awk '{print $NF}'`
+# sed -e "s/run_celltreeub\(.*\).fcl/run_slimmed_port_overlay.fcl/g" -e "s/FCLName:.*\"/FCLName: \"run_slimmed_port_overlay.fcl\"/g" $laststagefcl > port.fcl #multiple fhicls/stages, use the celltree one (last one) to generate the port stage fcl including all necessary metadata
+
+cp /pnfs/uboone/resilient/users/wgu/run_slimmed_port_data.fcl .
+lar -c run_slimmed_port_data.fcl -n -1 -s $input_artROOT | tee -a wirecell.log
 rm $input_artROOT
 
 
@@ -260,6 +304,7 @@ ls -t *.root | tee -a wirecell.log
 echo $input_artROOT0 | tee -a wirecell.log
 mv $input_artROOT0 $input_artROOT
 lar -n -1 -c run_wcpf_port.fcl -s $input_artROOT | tee -a wirecell.log
+
 
 echo "end reco 2 (2nd time)"
 echo "+++++++++++++++++++++++++++++"
