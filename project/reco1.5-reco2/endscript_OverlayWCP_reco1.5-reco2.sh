@@ -137,6 +137,9 @@ echo "++++++++++++++++++++++++++++"
 echo "start reco 2"
 input_celltree="nuselOVERLAY_WCP.root" # not a celltree any more
 
+xx <= nulseldummy*root
+eventcount=$eventcount - xx
+
 date | tee -a ../wirecell.log
 touch WCP_STM.log
 touch WCP_analysis.log
@@ -183,6 +186,7 @@ do
 	
 		if [ ! -e nue_${input2}.root ]; then
 			echo "++> $input2 no output." | tee -a WCP_analysis.log
+			exit 205
 		else	
 			echo "$n event analysis starts." | tee -a WCP_analysis.log
 			IFS=$'\n' #dviding symbol

@@ -48,7 +48,7 @@ bm_names = list()
 for name in basename_2:
   name1, length1 = find_best_match_name(basename_1, name)
   bm_names.append(name1)
-  if length1<100: print(name1, name)
+  if length1<75: print(name1, name)
 
 with open(ofile,'w') as f:
   for name in basename_1:

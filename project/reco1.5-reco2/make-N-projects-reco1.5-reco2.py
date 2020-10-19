@@ -150,10 +150,9 @@ def execute(obj):
 import copy, pprint
 pp = pprint.PrettyPrinter(indent=4)
 def parse_projects(context):
-  ret = []
-  default = copy.deepcopy(context)
-  del default["projects"]
   for cfg in context["projects"]:
+    default = copy.deepcopy(context)
+    del default["projects"]
     default.update(cfg)  
     print('==='); pp.pprint(default)
     execute(default)
