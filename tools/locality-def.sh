@@ -9,7 +9,7 @@ locality(){
 
 def=$1
 filelist=$(samweb list-files "defname:$def")
-filecounts=$(samweb list-files --summary "defname: mcc9_reco2_wc_intrinsic_1" | egrep "File count:" | cut -f2)
+filecounts=$(samweb list-files --summary "defname: $def" | egrep "File count:" | cut -f2)
 n=0 # no of files nearline (on tape)
 m=0 # no of checked files 
 for filename in $filelist;do
