@@ -18,12 +18,18 @@ for filename in $filelist;do
   # path="${url//root:\/\/fndca1.fnal.gov:1094\/pnfs\/fnal.gov\/usr//pnfs}"
   # echo $path
 
-  status=$(locality $filename)
-  if [[ $status == "NEARLINE" ]]; then # "ONLINE" or "ONELINE_OR_NEARLINE" means on disk
+  status_full=$(locality $filename)
+  IFS='\n'
+  read -ra status_array <<< "$status_full"
+  status="${status_array[0]}"
+  IFS=''
+
+  # echo $status
+  if [[ $status == "NEARLINE" ]];then # "ONLINE" or "ONLINE_AND_NEARLINE" means on disk
     n=$((n+1))
   fi
   m=$((m+1))
 
-  echo $n / $m / $filecounts [UNSTAGED / CHECKED / TOTAL]
+  echo $n, $m, $filecounts [UNSTAGED, CHECKED, TOTAL]
 done
 
