@@ -3,8 +3,10 @@
 locality(){
   f=$1
   dir=`samweb locate-file $f | egrep 'enstore:|dcache:' | cut -d: -f2 | cut -d\( -f1`
+  cwd=`pwd`
   cd $dir
   cat ".(get)($f)(locality)"
+  cd $cwd
 }
 
 def=$1
@@ -13,7 +15,6 @@ filecounts=$(samweb list-files --summary "defname: $def" | egrep "File count:" |
 n=0 # no of files nearline (on tape)
 m=0 # no of checked files 
 for filename in $filelist;do
-  # echo $filename
   # url=$(samweb get-file-access-url $filename --schema=root)
   # path="${url//root:\/\/fndca1.fnal.gov:1094\/pnfs\/fnal.gov\/usr//pnfs}"
   # echo $path
@@ -27,6 +28,7 @@ for filename in $filelist;do
   # echo $status
   if [[ $status == "NEARLINE" ]];then # "ONLINE" or "ONLINE_AND_NEARLINE" means on disk
     n=$((n+1))
+    echo $filename >> $def-nearline.txt
   fi
   m=$((m+1))
 
