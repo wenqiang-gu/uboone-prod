@@ -1,0 +1,11 @@
+./getFileListByDefname.sh [input defname] # output: input_path.txt
+mkdir files
+./fastcopy.sh input_path.txt
+
+find files/ -name "*root" -size +10k > copied.txt 
+find files/ -name "*root" -size -10k -printf '%f\n' > uncopied.txt # file size less than 10k
+
+hadd merge.root @copied.txt
+
+./createDefinition.py [output def name] # input txt: copied.txt
+                                        # please change it in the py script in needed
