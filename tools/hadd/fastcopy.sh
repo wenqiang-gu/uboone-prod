@@ -12,8 +12,8 @@ echo "local dir: " $LOCAL_DIR
 mkdir $LOCAL_DIR
 
 count=0
-for file in `cat $1`;do
-  timeout 3s ifdh cp $file $LOCAL_DIR
+for file in `cat $INPUT_FILE`;do
+  timeout 3s ifdh cp $file $LOCAL_DIR/
   echo $count $file
   let count++
 done
