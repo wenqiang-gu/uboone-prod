@@ -17,3 +17,8 @@ for file in `cat $INPUT_FILE`;do
   echo $count $file
   let count++
 done
+
+find $LOCAL_DIR -name "*root" -size +10k > $LOCAL_DIR\_copied.txt
+find $LOCAL_DIR -name "*root" -size -10k -printf '%f\n' > $LOCAL_DIR\_uncopied.txt
+
+hadd -f $LOCAL_DIR\_copied.root @$LOCAL_DIR\_copied.txt
