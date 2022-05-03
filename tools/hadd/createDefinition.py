@@ -9,9 +9,10 @@ from samweb_client.exceptions import *
 import os,sys
 defname=sys.argv[1]
 print(defname)
+localdir=sys.argv[2]
 
 dims='file_name'
-with open("uncopied.txt") as f:
+with open("%s_uncopied.txt" %localdir) as f:
   for line in f:
     if dims=='file_name': dims += ' '
     else: dims += ' ,'
