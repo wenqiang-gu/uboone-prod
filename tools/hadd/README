@@ -1,9 +1,11 @@
-./getFileListByDefname.sh [input defname] # output: input_path.txt
+./separate_online_files.sh [defname] # output: online_path.txt, offline_path.txt
+hadd merge.root @online_path.txt
+./createDefinition.py [output defname]
+
+==== obsolete
 ./fastcopy.sh input_path.txt <local_dir>
 
 # find files/ -name "*root" -size +10k > copied.txt 
 # find files/ -name "*root" -size -10k -printf '%f\n' > uncopied.txt # file size less than 10k
 # hadd merge.root @copied.txt
-
-./createDefinition.py [output def name] [local_dir] # input txt: <local_dir>_copied.txt
 
